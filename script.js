@@ -74,12 +74,12 @@ document.addEventListener('DOMContentLoaded', () => {
     tooltip.style.left = '50%';
     tooltip.style.transform = 'translateX(-50%)';
     tooltip.style.padding = '5px 10px';
-    tooltip.style.backgroundColor = 'white';
+    tooltip.style.backgroundColor = 'rgb(15, 15, 20';
     tooltip.style.color = 'white';
-    tooltip.style.borderRadius = '5px';
+    tooltip.style.borderRadius = '15px';
     tooltip.style.width = 'auto';
     tooltip.style.height = 'auto';
-    tooltip.style.opacity = '0.25';
+    tooltip.style.opacity = '1';
     tooltip.style.display = 'none';
     tooltip.style.zIndex = '9999';
     tooltip.style.fontFamily = 'JetBrains Mono';
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tooltip.innerText = 'Add';
         tooltip.style.display = 'block';
         tooltip.style.fontSize = '24px';
-        tooltip.style.color = 'black';
+        tooltip.style.color = 'white';
         tooltip.style.fontFamily = 'JetBrains Mono, monospace';
     });
     button.addEventListener('mouseout', () => {
@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tooltip.innerText = 'Draw Line';
         tooltip.style.display = 'block';
         tooltip.style.fontSize = '24px';
-        tooltip.style.color = 'black';
+        tooltip.style.color = 'white';
         tooltip.style.fontFamily = 'JetBrains Mono, monospace';
     });
     drawButton.addEventListener('mouseout', () => {
@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tooltip.innerText = 'Erase Line';
         tooltip.style.display = 'block';
         tooltip.style.fontSize = '24px';
-        tooltip.style.color = 'black';
+        tooltip.style.color = 'white';
         tooltip.style.fontFamily = 'JetBrains Mono, monospace';
     });
     deleteButton.addEventListener('mouseout', () => {
@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tooltip.innerText = 'Pan';
         tooltip.style.display = 'block';
         tooltip.style.fontSize = '24px';
-        tooltip.style.color = 'black';
+        tooltip.style.color = 'white';  
         tooltip.style.fontFamily = 'JetBrains Mono, monospace';
     });
     panButton.addEventListener('mouseout', () => {
@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tooltip.innerText = 'Save';
         tooltip.style.display = 'block';
         tooltip.style.fontSize = '24px';
-        tooltip.style.color = 'black';
+        tooltip.style.color = 'white';
         tooltip.style.fontFamily = 'JetBrains Mono, monospace';
     });
     saveButton.addEventListener('mouseout', () => {
@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tooltip.innerText = 'Load';
         tooltip.style.display = 'block';
         tooltip.style.fontSize = '24px';
-        tooltip.style.color = 'black';
+        tooltip.style.color = 'white';
         tooltip.style.fontFamily = 'JetBrains Mono, monospace';
     });
     loadButton.addEventListener('mouseout', () => {
@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tooltip.innerText = 'Clear \n (WARNING DELETES EVERYTHING)';
         tooltip.style.display = 'block';
         tooltip.style.fontSize = '24px';
-        tooltip.style.color = 'black';
+        tooltip.style.color = 'white';
         tooltip.style.textAlign = 'center';
         tooltip.style.fontFamily = 'JetBrains Mono, monospace';
     });
@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function drawRectangle(rectData = null) {
         const rect = document.createElement('div');
         rect.className = 'rectangle';
-        rect.style.backgroundColor = 'slategray';
+        rect.style.backgroundColor = 'rgb(45, 45, 55)';
         rect.style.width = '20%';
         rect.style.height = '20%';
         rect.style.borderRadius = '5px';
@@ -188,6 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
         rect.style.top = rectData ? rectData.top : '0';
         rect.style.width = rectData ? rectData.width : '20%';
         rect.style.height = rectData ? rectData.height : '20%';
+        rect.style.fontSize = rectData ? rectData.fontSize : '48px';
         document.body.appendChild(rect);
 
         const closeButton = document.createElement('button');
@@ -272,6 +273,13 @@ document.addEventListener('DOMContentLoaded', () => {
         let isResizing = false;
         let currentHandle;
 
+        // // Track mouse position
+        // document.addEventListener('mousemove', (e) => {
+        //     const mouseX = e.clientX;
+        //     const mouseY = e.clientY;
+        // });
+
+        // Resize rectangle
         rect.addEventListener('mousedown', (e) => {
             if (!isLocked && !isPanning && e.target.classList.contains('resize-handle')) {
                 isResizing = true;
@@ -280,6 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 offsetY = e.clientY;
                 highestZIndex++;
                 rect.style.zIndex = highestZIndex; // Bring to front and update highest z-index
+                rect.style.position = 'absolute';
             }
         });
 
@@ -291,20 +300,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 const rect_height = rect.offsetHeight;
                 const rect_left = rect.offsetLeft;
                 const rect_top = rect.offsetTop;
-        
+                
                 if (currentHandle.includes('right')) {
                     const newWidth = (rect_width + dx) / window.innerWidth * 100;
-                    rect.style.width = `${newWidth}%`;
+                    rect.style.width = `${newWidth}%`;  
                 }
         
                 if (currentHandle.includes('bottom')) {
                     const newHeight = (rect_height + dy) / window.innerHeight * 100;
-                    rect.style.height = `${newHeight}%`;
+                    rect.style.height = `${newHeight}%`; 
                 }
-        
-                rect.style.left = `${rect_left / window.innerWidth * 0}%`;
-                rect.style.top = `${rect_top / window.innerHeight % 0}%`;
-        
                 offsetX = e.clientX;
                 offsetY = e.clientY;
             }
@@ -320,7 +325,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Add + button to the center of the box
         const addButton = document.createElement('button');
         addButton.innerHTML = '<i class="fa-solid fa-photo-film"></i>';
-        // addButton.className = 'squish-button';
         addButton.id = 'add-button';
         addButton.style.position = 'absolute';
         addButton.style.top = '50%';
@@ -329,7 +333,7 @@ document.addEventListener('DOMContentLoaded', () => {
         addButton.style.cursor = 'pointer';
         rect.appendChild(addButton);
 
-        addButton.addEventListener('click', () => {
+        addButton.addEventListener('click', (textData) => {
             if (!isPanning) {
                 const content = prompt('Enter Text or Image Address:');
                 if (content) {
@@ -352,6 +356,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         text.style.top = '50%';
                         text.style.left = '50%';
                         text.style.transform = 'translate(-50%, -50%)';
+                        rect.style.fontSize = rectData ? rectData.fontSize : '48px';
                         rect.appendChild(text);
                     }
                     rect.removeChild(addButton);
@@ -359,7 +364,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
-
+        // Add content to the rectangle
         if (rectData && rectData.content) {
             if (rectData.content.startsWith('http')) {
                 const img = document.createElement('img');
@@ -384,7 +389,7 @@ document.addEventListener('DOMContentLoaded', () => {
             rect.removeChild(addButton);
         }
     }
-
+    
     drawButton.addEventListener('click', () => {
         isDrawing = !isDrawing;
         isDeleting = false;
@@ -396,7 +401,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.toggle('drawing', isDrawing);
         document.body.classList.remove('panning');
     });
-
+    
     deleteButton.addEventListener('click', () => {
         isDeleting = !isDeleting;
         isDrawing = false;
@@ -408,7 +413,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.remove('drawing');
         document.body.classList.remove('panning');
     });
-
+    
     panButton.addEventListener('click', () => {
         isPanning = !isPanning;
         isDrawing = false;
@@ -419,7 +424,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.cursor = isPanning ? 'grab' : 'default';
         document.body.classList.toggle('panning', isPanning);
     });
-
+    
     document.addEventListener('mousedown', (e) => {
         if (isDrawing) {
             if (!lineStart) {
@@ -442,7 +447,7 @@ document.addEventListener('DOMContentLoaded', () => {
             saveState();
         }
     });
-
+    
     document.addEventListener('mousemove', (e) => {
         if (isPanning && isDragging) {
             const dx = e.clientX - startX;
@@ -450,7 +455,7 @@ document.addEventListener('DOMContentLoaded', () => {
             window.scrollTo(scrollLeft - dx, scrollTop - dy);
         }
     });
-
+    
     document.addEventListener('mouseup', () => {
         if (isPanning) {
             isDragging = false;
@@ -486,6 +491,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 height: rect.style.height,
                 left: rect.style.left,
                 top: rect.style.top,
+                bottom: rect.style.bottom,
+                right: rect.style.right,
+                fontSize: rect.querySelector('p') ? rect.querySelector('p').style.fontSize : null,
                 content: content
             };
         });
@@ -499,9 +507,10 @@ document.addEventListener('DOMContentLoaded', () => {
             };
         });
 
+
         const state = {
             rectangles,
-            lines
+            lines,
         };
 
         localStorage.setItem('graphBoardState', JSON.stringify(state));
@@ -535,9 +544,3 @@ style.innerHTML = `
 `;
 
 document.head.appendChild(style);
-
-document.addEventListener('mousemove', function(event) {
-    var x = event.clientX;
-    var y = event.clientY;
-    // console.log('Mouse position: X=' + x + ', Y=' + y);
-});
