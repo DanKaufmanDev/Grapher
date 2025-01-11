@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     button.style.top = '10px';
     button.style.left = '10px';
     button.style.zIndex = '9999';
+    button.ariaLabel = 'Add Box';
     document.body.appendChild(button);
 
     const drawButton = document.createElement('button');
@@ -15,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     drawButton.style.top = '10px';
     drawButton.style.left = '70px';
     drawButton.style.zIndex = '9999';
+    drawButton.ariaLabel = 'Draw Line';
     document.body.appendChild(drawButton);
 
     const deleteButton = document.createElement('button');
@@ -24,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     deleteButton.style.top = '10px';
     deleteButton.style.left = '130px';
     deleteButton.style.zIndex = '9999';
+    deleteButton.ariaLabel = 'Erase Line';
     document.body.appendChild(deleteButton);
 
     const panButton = document.createElement('button');
@@ -33,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     panButton.style.top = '10px';
     panButton.style.left = '190px';
     panButton.style.zIndex = '9999';
+    panButton.ariaLabel = 'Pan';
     document.body.appendChild(panButton);
 
     const saveButton = document.createElement('button');
@@ -42,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     saveButton.style.top = '10px';
     saveButton.style.left = '250px';
     saveButton.style.zIndex = '9999';
+    saveButton.ariaLabel = 'Save';
     document.body.appendChild(saveButton);
 
     const loadButton = document.createElement('button');
@@ -51,6 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadButton.style.top = '10px';
     loadButton.style.left = '310px';
     loadButton.style.zIndex = '9999';
+    loadButton.ariaLabel = 'Load Save';
     document.body.appendChild(loadButton);
 
     const nukeButton = document.createElement('button');
@@ -60,6 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
     nukeButton.style.top = '10px';
     nukeButton.style.left = '370px';
     nukeButton.style.zIndex = '9999';
+    nukeButton.ariaLabel = 'Clear Screen Warning will delete everything';
     document.body.appendChild(nukeButton);
 
     nukeButton.addEventListener('click', () => {
@@ -82,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
     tooltip.style.opacity = '1';
     tooltip.style.display = 'none';
     tooltip.style.zIndex = '9999';
-    tooltip.style.fontFamily = 'JetBrains Mono';
+    tooltip.style.fontFamily = 'JetBrains Mono, monospace';
     document.body.appendChild(tooltip);
 
     button.addEventListener('mouseover', () => {
@@ -165,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     button.addEventListener('click', drawRectangle);
 
-    let highestZIndex = 1; // Track the highest z-index
+    let highestZIndex = 1;
     let isPanning = false;
     let isDrawing = false;
     let isDeleting = false;
@@ -183,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
         rect.style.border = '1px solid white';
         rect.style.position = 'absolute';
         rect.style.cursor = 'move';
-        rect.style.zIndex = highestZIndex; // Set initial z-index
+        rect.style.zIndex = highestZIndex;
         rect.style.left = rectData ? rectData.left : '0';
         rect.style.top = rectData ? rectData.top : '0';
         rect.style.width = rectData ? rectData.width : '20%';
@@ -235,7 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 offsetX = e.clientX - rect.offsetLeft;
                 offsetY = e.clientY - rect.offsetTop;
                 highestZIndex++;
-                rect.style.zIndex = highestZIndex; // Bring to front and update highest z-index
+                rect.style.zIndex = highestZIndex; 
             }
         });
 
@@ -272,12 +279,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let isResizing = false;
         let currentHandle;
-
-        // // Track mouse position
-        // document.addEventListener('mousemove', (e) => {
-        //     const mouseX = e.clientX;
-        //     const mouseY = e.clientY;
-        // });
 
         // Resize rectangle
         rect.addEventListener('mousedown', (e) => {
@@ -364,6 +365,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
+
         // Add content to the rectangle
         if (rectData && rectData.content) {
             if (rectData.content.startsWith('http')) {
@@ -476,7 +478,7 @@ document.addEventListener('DOMContentLoaded', () => {
         line.style.width = `${length / window.innerWidth * 100}%`;
         const angle = lineData ? lineData.angle : Math.atan2(end.y - start.y, end.x - start.x) * (180 / Math.PI);
         line.style.transform = `rotate(${angle}deg)`;
-        line.style.zIndex = highestZIndex + 1; // Ensure lines are above boxes
+        line.style.zIndex = highestZIndex + 1; 
         document.body.appendChild(line);
     }
 
@@ -507,10 +509,9 @@ document.addEventListener('DOMContentLoaded', () => {
             };
         });
 
-
         const state = {
             rectangles,
-            lines,
+            lines
         };
 
         localStorage.setItem('graphBoardState', JSON.stringify(state));
