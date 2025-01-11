@@ -1,5 +1,5 @@
 body{
-    background-color: rgb(20, 20, 20, 0.98);
+    background-color: rgb(15, 15, 20, 0.97);
 }
 
 button{
@@ -53,4 +53,28 @@ cursor: pointer;
 		background-color: transparent;
 		transition: height 0.25s ease;
 	}
+}
+#add-button {
+	width: 125px;
+	height: 125px;
+	opacity: 0.25;
+	border-radius: 25px;
+	border: 3px dotted white;
+	font-size: xx-large;
+}
+#delete-button {
+	width: 35px;
+	height: 35px;
+	opacity: 0.5;
+	border-radius: 5px;
+	border: 1.5px solid black;
+	font-size: medium;
+}
+#lock-button {
+	width: 35px;
+	height: 35px;
+	opacity: 0.5;
+	border-radius: 5px;
+	border: 1.5px solid black;
+	font-size: medium;
 }

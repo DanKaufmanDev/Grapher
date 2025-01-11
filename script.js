@@ -67,6 +67,102 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.forEach(element => document.body.removeChild(element));
         saveState();
     });
+
+    const tooltip = document.createElement('div');
+    tooltip.style.position = 'fixed';
+    tooltip.style.top = '10px';
+    tooltip.style.left = '50%';
+    tooltip.style.transform = 'translateX(-50%)';
+    tooltip.style.padding = '5px 10px';
+    tooltip.style.backgroundColor = 'white';
+    tooltip.style.color = 'white';
+    tooltip.style.borderRadius = '5px';
+    tooltip.style.width = 'auto';
+    tooltip.style.height = 'auto';
+    tooltip.style.opacity = '0.25';
+    tooltip.style.display = 'none';
+    tooltip.style.zIndex = '9999';
+    tooltip.style.fontFamily = 'JetBrains Mono';
+    document.body.appendChild(tooltip);
+
+    button.addEventListener('mouseover', () => {
+        tooltip.innerText = 'Add Rectangle';
+        tooltip.style.display = 'block';
+        tooltip.style.fontSize = '24px';
+        tooltip.style.color = 'black';
+        tooltip.style.fontFamily = 'JetBrains Mono, monospace';
+    });
+    button.addEventListener('mouseout', () => {
+        tooltip.style.display = 'none';
+    });
+
+    drawButton.addEventListener('mouseover', () => {
+        tooltip.innerText = 'Draw Line';
+        tooltip.style.display = 'block';
+        tooltip.style.fontSize = '24px';
+        tooltip.style.color = 'black';
+        tooltip.style.fontFamily = 'JetBrains Mono, monospace';
+    });
+    drawButton.addEventListener('mouseout', () => {
+        tooltip.style.display = 'none';
+    });
+
+    deleteButton.addEventListener('mouseover', () => {
+        tooltip.innerText = 'Erase Line';
+        tooltip.style.display = 'block';
+        tooltip.style.fontSize = '24px';
+        tooltip.style.color = 'black';
+        tooltip.style.fontFamily = 'JetBrains Mono, monospace';
+    });
+    deleteButton.addEventListener('mouseout', () => {
+        tooltip.style.display = 'none';
+    });
+
+    panButton.addEventListener('mouseover', () => {
+        tooltip.innerText = 'Pan Mode';
+        tooltip.style.display = 'block';
+        tooltip.style.fontSize = '24px';
+        tooltip.style.color = 'black';
+        tooltip.style.fontFamily = 'JetBrains Mono, monospace';
+    });
+    panButton.addEventListener('mouseout', () => {
+        tooltip.style.display = 'none';
+    });
+
+    saveButton.addEventListener('mouseover', () => {
+        tooltip.innerText = 'Save';
+        tooltip.style.display = 'block';
+        tooltip.style.fontSize = '24px';
+        tooltip.style.color = 'black';
+        tooltip.style.fontFamily = 'JetBrains Mono, monospace';
+    });
+    saveButton.addEventListener('mouseout', () => {
+        tooltip.style.display = 'none';
+    });
+
+    loadButton.addEventListener('mouseover', () => {
+        tooltip.innerText = 'Load Save';
+        tooltip.style.display = 'block';
+        tooltip.style.fontSize = '24px';
+        tooltip.style.color = 'black';
+        tooltip.style.fontFamily = 'JetBrains Mono, monospace';
+    });
+    loadButton.addEventListener('mouseout', () => {
+        tooltip.style.display = 'none';
+    });
+
+    nukeButton.addEventListener('mouseover', () => {
+        tooltip.innerText = 'Clear \n (WARNING DELETES EVERYTHING)';
+        tooltip.style.display = 'block';
+        tooltip.style.fontSize = '24px';
+        tooltip.style.color = 'black';
+        tooltip.style.textAlign = 'center';
+        tooltip.style.fontFamily = 'JetBrains Mono, monospace';
+    });
+    nukeButton.addEventListener('mouseout', () => {
+        tooltip.style.display = 'none';
+    });
+
     button.addEventListener('click', drawRectangle);
 
     let highestZIndex = 1; // Track the highest z-index
@@ -79,11 +175,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function drawRectangle(rectData = null) {
         const rect = document.createElement('div');
         rect.className = 'rectangle';
-        rect.style.width = rectData ? rectData.width : '25%';
-        rect.style.height = rectData ? rectData.height : '25%';
         rect.style.backgroundColor = 'slategray';
-        rect.style.width = '25%';
-        rect.style.height = '25%';
+        rect.style.width = '20%';
+        rect.style.height = '20%';
         rect.style.borderRadius = '5px';
         rect.style.opacity = '0.5';
         rect.style.border = '1px solid white';
@@ -96,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const closeButton = document.createElement('button');
         closeButton.innerHTML = '<i class="fa-solid fa-trash"></i>';
-        closeButton.className = 'squish-button';
+        closeButton.id = 'delete-button';
         closeButton.style.position = 'absolute';
         closeButton.style.top = '0';
         closeButton.style.right = '0';
@@ -112,7 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const lockButton = document.createElement('button');
         lockButton.innerHTML = '<i class="fa-solid fa-lock"></i>';
-        lockButton.className = 'squish-button';
+        lockButton.id = 'lock-button';
         lockButton.style.position = 'absolute';
         lockButton.style.top = '0';
         lockButton.style.left = '0';
@@ -163,10 +257,10 @@ document.addEventListener('DOMContentLoaded', () => {
         div.style.position = 'absolute';
         div.style.width = '10px';
         div.style.height = '10px';
-        div.style.backgroundColor = 'slategray';
-        div.style.opacity = '0.25';
+        div.style.backgroundColor = 'black';
+        div.style.opacity = '0.2';
         div.style.borderTopLeftRadius = '25px';
-        div.style.border = '1px solid black';
+        div.style.border = '2px solid black';
         div.style.cursor = `${handle.replace('-', '')}-resize`;
         rect.appendChild(div);
 
@@ -224,7 +318,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Add + button to the center of the box
         const addButton = document.createElement('button');
         addButton.innerHTML = '<i class="fa-solid fa-photo-film"></i>';
-        addButton.className = 'squish-button';
+        // addButton.className = 'squish-button';
+        addButton.id = 'add-button';
         addButton.style.position = 'absolute';
         addButton.style.top = '50%';
         addButton.style.left = '50%';
@@ -436,12 +531,5 @@ style.innerHTML = `
         display: none !important;
     }
 `;
+
 document.head.appendChild(style);
-
-
-// #TODO \\
-// - fix sizing saving and loading -\\
-// -- prettier UI --\\
-// --- make rectangles spawn at mouse position ---\\
-// ---- make rectangles little smaller on spawn ----\\ 
-// ----- maybe add a snap to grid feature -----\\
