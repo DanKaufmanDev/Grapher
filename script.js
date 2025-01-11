@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(tooltip);
 
     button.addEventListener('mouseover', () => {
-        tooltip.innerText = 'Add Rectangle';
+        tooltip.innerText = 'Add';
         tooltip.style.display = 'block';
         tooltip.style.fontSize = '24px';
         tooltip.style.color = 'black';
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     panButton.addEventListener('mouseover', () => {
-        tooltip.innerText = 'Pan Mode';
+        tooltip.innerText = 'Pan';
         tooltip.style.display = 'block';
         tooltip.style.fontSize = '24px';
         tooltip.style.color = 'black';
@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     loadButton.addEventListener('mouseover', () => {
-        tooltip.innerText = 'Load Save';
+        tooltip.innerText = 'Load';
         tooltip.style.display = 'block';
         tooltip.style.fontSize = '24px';
         tooltip.style.color = 'black';
@@ -186,6 +186,8 @@ document.addEventListener('DOMContentLoaded', () => {
         rect.style.zIndex = highestZIndex; // Set initial z-index
         rect.style.left = rectData ? rectData.left : '0';
         rect.style.top = rectData ? rectData.top : '0';
+        rect.style.width = rectData ? rectData.width : '20%';
+        rect.style.height = rectData ? rectData.height : '20%';
         document.body.appendChild(rect);
 
         const closeButton = document.createElement('button');
@@ -533,3 +535,9 @@ style.innerHTML = `
 `;
 
 document.head.appendChild(style);
+
+document.addEventListener('mousemove', function(event) {
+    var x = event.clientX;
+    var y = event.clientY;
+    // console.log('Mouse position: X=' + x + ', Y=' + y);
+});

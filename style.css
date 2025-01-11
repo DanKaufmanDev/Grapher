@@ -55,8 +55,8 @@ cursor: pointer;
 	}
 }
 #add-button {
-	width: 125px;
-	height: 125px;
+	width: 100px;
+	height: 100px;
 	opacity: 0.25;
 	border-radius: 25px;
 	border: 3px dotted white;
