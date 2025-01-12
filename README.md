@@ -14,7 +14,7 @@ Unlimited Creativity: Arrange and modify your board to your heart's content, wit
 We welcome contributions from the community to make Grapher even better! Feel free to open issues or submit pull requests.
 
 ### License
-This project is licensed under the MIT License. See the [LICENSE](https://opensource.org/license/mit) file for more details.
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/DanKaufmanDev/Grapher/tree/master?tab=MIT-1-ov-file#readme) file for more details.
 
 ### Contact
 For any questions or feedback, please feel free to reach out.
